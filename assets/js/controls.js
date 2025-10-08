@@ -74,6 +74,16 @@
   const wrap = el('div', { class:'cc-fixed-wrap', role:'group', 'aria-label':'Controles de accesibilidad' }, [
     el('span', { class:'cc-label', id:'cc-label' }, ['🛠️ ', 'Controles:']),
     (function(){
+      // "Inicio" button (🏠) — works from any subpage of the GitHub Pages repo
+      const base = (function(){
+        const parts = location.pathname.split('/').filter(Boolean);
+        return parts.length ? ('/' + parts[0] + '/') : '/';
+      })();
+      const a = el('a', { id:'btn-home', class:'cc-btn', href: base, title:'Inicio' }, ['🏠 ', 'Inicio']);
+      return a;
+    })(),
+
+    (function(){
       const b = el('button', { id:'btn-contrast', class:'cc-btn', 'aria-pressed': String(!!S.contrast), 'data-active': String(!!S.contrast), title:'Alto contraste' }, ['🌓 ', 'Alto contraste']);
       b.addEventListener('click', () => {
         S.contrast = !S.contrast;

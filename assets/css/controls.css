@@ -97,3 +97,19 @@ body.cc-contrast a { color: #9fd3ff; }
 @media print {
   .cc-fixed-wrap { display: none !important; }
 }
+
+/* --- Enhancements for 🏠 Inicio button --- */
+@keyframes cc-pop {
+  from { transform: scale(.96); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+#btn-home {
+  animation: cc-pop .28s ease-out both;
+  font-weight: 700;
+}
+#btn-home:hover {
+  transform: translateY(-1px) scale(1.03);
+}
+#btn-home:active {
+  transform: translateY(0) scale(0.99);
+}
