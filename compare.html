@@ -1,0 +1,44 @@
+<!doctype html><html lang="es"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Comparar</title>
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="assets/css/styles.css">
+<script defer src="assets/js/app.js"></script>
+<script defer src="assets/js/models.js"></script>
+<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+<style>
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:900px){.split{grid-template-columns:1fr}}
+  model-viewer{height:65vh;width:100%;border-radius:16px;background:#0b1220}
+  .bar{display:flex;gap:8px;margin:8px 0}
+  select{background:#0f1930;color:#e8eefc;border:1px solid #22335b;border-radius:12px;padding:8px}
+</style>
+</head><body>
+<div class="container">
+  <a class="btn" href="./">⬅️ Inicio</a>
+  <h1>🔍 Comparador</h1>
+  <div class="bar">
+    <label>Izquierda:</label> <select id="leftSel"></select>
+    <label>Derecha:</label> <select id="rightSel"></select>
+  </div>
+  <div class="split">
+    <model-viewer id="L" camera-controls></model-viewer>
+    <model-viewer id="R" camera-controls></model-viewer>
+  </div>
+</div>
+<script>
+  const list=(window.MODELS||[]);
+  const L=document.getElementById('L'), R=document.getElementById('R');
+  const LS=document.getElementById('leftSel'), RS=document.getElementById('rightSel');
+  function add(sel){list.forEach(m=>{const o=document.createElement('option');o.value=m.path;o.textContent=m.label;sel.appendChild(o);});}
+  function load(){const p=new URLSearchParams(location.search);
+    const l=p.get('left')||(list[0]&&list[0].path); const r=p.get('right')||(list[1]&&list[1].path)||l;
+    L.src=l; R.src=r; LS.value=l; RS.value=r;}
+  function sync(a,b){a.addEventListener('camera-change',()=>{try{
+    const o=a.getCameraOrbit(); b.cameraOrbit=o.toString();
+    b.fieldOfView=a.fieldOfView; b.cameraTarget=a.getCameraTarget().toString();
+  }catch(e){} });}
+  add(LS); add(RS); load(); LS.addEventListener('change',()=>L.src=LS.value); RS.addEventListener('change',()=>R.src=RS.value);
+  sync(L,R); sync(R,L);
+</script>
+</body></html>
