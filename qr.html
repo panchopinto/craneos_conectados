@@ -1,25 +1,18 @@
 <!doctype html><html lang="es"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>QR del modelo</title>
+<title>QR</title>
 <link rel="manifest" href="manifest.json">
 <link rel="stylesheet" href="assets/css/styles.css">
 <script defer src="assets/js/app.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <style>.box{display:flex;flex-direction:column;align-items:center;gap:12px;margin-top:24px}</style>
 </head><body>
-<div class="container">
-  <a class="btn" href="./">⬅️ Inicio</a>
-  <h1>🔗 QR</h1>
-  <div class="box">
-    <div id="qrcode"></div>
-    <input id="link" class="small" style="width:100%;padding:10px;border-radius:12px;border:1px solid #22335b;background:#0f1930;color:#e8eefc">
-    <a id="open" class="btn">Abrir enlace</a>
-  </div>
+<div class="container"><a class="btn" href="./">⬅️ Inicio</a><h1>🔗 QR</h1>
+  <div class="box"><div id="qrcode"></div><input id="link" class="small" style="width:100%;padding:10px;border-radius:12px;border:1px solid #22335b;background:#0f1930;color:#e8eefc"><a id="open" class="btn">Abrir enlace</a></div>
 </div>
 <script>
-  const raw=new URLSearchParams(location.search).get('url')||'./';
-  const abs=new URL(raw, location.href).href;
-  document.getElementById('link').value=abs; document.getElementById('open').href=abs;
-  new QRCode(document.getElementById("qrcode"), { text: abs, width: 240, height: 240 });
+  const raw=new URLSearchParams(location.search).get("url")||"./";
+  const abs=new URL(raw,location.href).href; document.getElementById("link").value=abs; document.getElementById("open").href=abs;
+  new QRCode(document.getElementById("qrcode"),{text:abs,width:240,height:240});
 </script>
 </body></html>

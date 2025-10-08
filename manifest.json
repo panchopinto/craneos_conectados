@@ -1,0 +1,9 @@
+{
+  "name": "Cráneos 3D — Inclusivo",
+  "short_name": "Craneos3D",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0b1220",
+  "theme_color": "#0b1220",
+  "icons": []
+}
