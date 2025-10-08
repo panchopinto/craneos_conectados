@@ -25,26 +25,35 @@
   </div>
 
   
+  
   <script>
-    const raw = getParam('src') || "";
-    // decode and normalize
-    let src = decodeURIComponent(raw);
-    // Fix accidental duplicates like assets/models/assets/models/...
-    src = src.replace(/(assets\/models\/){2,}/g, "assets/models/");
-    // Remove leading "./" or "/" to keep path relative to this page
-    src = src.replace(/^\/?\.?\/?/, "");
-    // Optional: if someone passed just a filename, prefix the models folder
-    if (src && !/^assets\/models\//.test(src)) {
-      src = "assets/models/" + src;
+  (function(){
+    function getParamLocal(name, search){ 
+      const p = new URLSearchParams(search || location.search); 
+      return p.get(name) || ""; 
     }
-    const title = decodeURIComponent(getParam('title')||'3D');
-    document.title = '3D - ' + title;
-    const t = document.getElementById('title'); if (t) t.textContent = title;
-    const mv = document.getElementById('mv');
-    if (mv) mv.src = src;
+    window.addEventListener('DOMContentLoaded', function(){
+      const raw = (typeof getParam === 'function' ? getParam('src') : getParamLocal('src')) || "";
+      let src = decodeURIComponent(raw);
+      // Fix accidental duplicates like assets/models/assets/models/...
+      src = src.replace(/(assets\/models\/){2,}/g, "assets/models/");
+      // Remove leading "./" or "/" to keep path relative to this page
+      src = src.replace(/^\/?\.?\/?/, "");
+      // Optional: if someone passed just a filename, prefix the models folder
+      if (src && !/^assets\/models\//.test(src)) {
+        src = "assets/models/" + src;
+      }
+      const title = decodeURIComponent((typeof getParam === 'function' ? getParam('title') : getParamLocal('title')) || '3D');
+      document.title = '3D - ' + title;
+      const t = document.getElementById('title'); if (t) t.textContent = title;
+      const mv = document.getElementById('mv');
+      if (mv) mv.src = src;
+    });
+  })();
   </script>
 
   <script src="assets/js/controls.js"></script>
+
 </body>
 <footer>
   <div style="display:flex;flex-direction:column;gap:6px;align-items:center;text-align:center">
