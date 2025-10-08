@@ -1,0 +1,99 @@
+:root {
+  --cc-gap: .6rem;
+  --cc-radius: 14px;
+  --cc-bg: rgba(9,18,32,.6);
+  --cc-border: rgba(255,255,255,.12);
+  --cc-btn-bg: rgba(255,255,255,.06);
+  --cc-btn-bg-active: rgba(255,255,255,.18);
+  --cc-txt: #e8f0ff;
+  --cc-shadow: 0 10px 24px rgba(0,0,0,.25);
+  --cc-focus: 0 0 0 3px rgba(95,178,255,.55);
+  --cc-btn-pad: .5rem .9rem;
+  --cc-z: 9999;
+}
+
+html.cc-font-sm { font-size: 93.75%; }   /* 15px if base is 16 */
+html.cc-font-md { font-size: 100%; }     /* default */
+html.cc-font-lg { font-size: 112.5%; }   /* 18px */
+html.cc-font-xl { font-size: 125%; }     /* 20px */
+
+.cc-fixed-wrap {
+  position: fixed;
+  top: 14px;
+  right: 14px;
+  z-index: var(--cc-z);
+  display: flex;
+  align-items: center;
+  gap: var(--cc-gap);
+  background: var(--cc-bg);
+  border: 1px solid var(--cc-border);
+  border-radius: calc(var(--cc-radius) + 2px);
+  padding: .55rem .75rem;
+  box-shadow: var(--cc-shadow);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+
+.cc-label {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  color: var(--cc-txt);
+  font-weight: 600;
+  opacity: .9;
+  padding-right: .25rem;
+}
+
+.cc-btn {
+  appearance: none;
+  border: 1px solid var(--cc-border);
+  background: var(--cc-btn-bg);
+  color: var(--cc-txt);
+  font-weight: 600;
+  padding: var(--cc-btn-pad);
+  border-radius: var(--cc-radius);
+  cursor: pointer;
+  transition: transform .04s ease, background .2s ease, border-color .2s ease;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  text-decoration: none;
+}
+
+.cc-btn[data-active="true"] {
+  background: var(--cc-btn-bg-active);
+}
+
+.cc-btn:focus-visible {
+  outline: none;
+  box-shadow: var(--cc-focus);
+}
+
+.cc-btn:active { transform: translateY(1px); }
+
+/* High-contrast theme toggled by .cc-contrast on body */
+body.cc-contrast, .cc-contrast body {
+  --cc-bg: #0a0a0a;
+  --cc-border: #2a2a2a;
+  --cc-btn-bg: #141414;
+  --cc-btn-bg-active: #1f1f1f;
+  --cc-txt: #f8f8f8;
+  color: #f8f8f8;
+  background-color: #0b0f15;
+}
+
+body.cc-contrast a { color: #9fd3ff; }
+
+/* Safe area for mobile notch */
+@supports (padding: max(0px)) {
+  .cc-fixed-wrap {
+    top: max(14px, env(safe-area-inset-top));
+    right: max(14px, env(safe-area-inset-right));
+  }
+}
+
+/* When printing, hide controls */
+@media print {
+  .cc-fixed-wrap { display: none !important; }
+}
