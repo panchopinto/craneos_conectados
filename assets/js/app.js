@@ -79,3 +79,16 @@ function restorePrefs(){
 }
 
 document.addEventListener("DOMContentLoaded", restorePrefs);
+
+
+function getParam(n,s=location.search){const p=new URLSearchParams(s);return p.get(n)||''}
+function toggleContrast(){document.documentElement.classList.toggle('high-contrast'); localStorage.setItem('contrast', document.documentElement.classList.contains('high-contrast')?'1':'0');}
+function setFontSize(d){const s=getComputedStyle(document.documentElement).fontSize;let px=parseFloat(s);px=Math.min(22,Math.max(12,px+d));document.documentElement.style.fontSize=px+'px';localStorage.setItem('fontSize',px);}
+let currentLang=localStorage.getItem('lang')||'es';
+function toggleLang(){currentLang=currentLang==='es'?'en':'es';localStorage.setItem('lang',currentLang);}
+if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./service-worker.js'));}
+document.addEventListener('DOMContentLoaded',()=>{
+  if(localStorage.getItem('contrast')==='1'){document.documentElement.classList.add('high-contrast');}
+  const fs=localStorage.getItem('fontSize'); if(fs) document.documentElement.style.fontSize=fs+'px';
+});
+
