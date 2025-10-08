@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Viewer AR</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <script defer src="assets/js/app.js"></script>
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <div class="row" style="justify-content:space-between; align-items:center">
+      <a class="btn" href="./">⬅️ Inicio</a>
+      <div class="toolbar">
+        <a class="btn btn-contrast" href="#" onclick="toggleContrast();return false;">🌓 <span data-i18n="contrast">Alto contraste</span></a>
+        <a class="btn btn-text" href="#" onclick="setFontSize(1);return false;">A+</a>
+        <a class="btn btn-text" href="#" onclick="setFontSize(-1);return false;">A−</a>
+        <a class="btn btn-lang" href="#" onclick="toggleLang();return false;">🌐 <span data-i18n="lang">ES/EN</span></a>
+      </div>
+    </div>
+    <h1 id="title">📱 AR</h1>
+
+    <model-viewer id="mv" src="" camera-controls ar ar-modes="webxr scene-viewer quick-look" shadow-intensity="0.6"
+      style="width:100%;height:70vh;border-radius:16px;background:#0b1220">
+      <button slot="ar-button" class="btn btn-ar">📱 <span>Iniciar AR</span></button>
+      <div class="small" slot="poster">Cargando…</div>
+    </model-viewer>
+
+    <p class="small">Si tu dispositivo soporta AR, toca “Iniciar AR” para colocar el cráneo en tu entorno.</p>
+  </div>
+
+  <script>
+    const src = getParam('src'); const title = decodeURIComponent(getParam('title')||'AR');
+    document.title = 'AR - ' + title;
+    document.getElementById('title').textContent = title;
+    const mv = document.getElementById('mv'); mv.src = src;
+  </script>
+</body>
+</html>

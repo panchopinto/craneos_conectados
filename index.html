@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Cráneos 3D — Inclusivo</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <script defer src="assets/js/app.js"></script>
+</head>
+<body>
+  <div class="header">
+    <div class="container">
+      <div class="row">
+        <h1 data-i18n="title">CRÁNEOS 3D — Patrimonio Natural</h1>
+        <div class="kicker small" style="margin-left:auto;">
+          <span>🛠️ <span data-i18n="controls">Controles</span>:</span>
+          <a class="btn btn-contrast" href="#" onclick="toggleContrast();return false;">🌓 <span data-i18n="contrast">Alto contraste</span></a>
+          <a class="btn btn-text" href="#" onclick="setFontSize(1);return false;">A+</a>
+          <a class="btn btn-text" href="#" onclick="setFontSize(-1);return false;">A−</a>
+          <a class="btn btn-lang" href="#" onclick="toggleLang();return false;">🌐 <span data-i18n="lang">ES/EN</span></a>
+        </div>
+      </div>
+      <p class="lead" data-i18n="intro">Explora modelos 3D de cráneos de fauna chilena con accesibilidad y aprendizaje inclusivo.</p>
+      <div class="badge" data-i18n="rights">El acceso al patrimonio cultural es un derecho fundamental que permite a las personas participar de la vida cultural, fortalecer su identidad y promover la inclusión.</div>
+    </div>
+  </div>
+
+  <main class="container">
+    <div class="grid">
+      
+      <article class="card">
+        <h3>🦦 <span class="es">Lontra felina (Chungungo)</span><span class="en hidden">Marine otter (Lontra felina)</span></h3>
+        <div class="tag">GLB • assets/models/lontra_felina.glb</div>
+        <div class="row" style="margin-top:10px">
+          <a class="btn btn-3d" href="viewer3d.html?src=assets/models/lontra_felina.glb&title=%F0%9F%A6%A6%20Lontra%20felina%20%28Chungungo%29" data-i18n="btn3d">👁️ Ver en 3D</a>
+          <a class="btn btn-ar" href="viewerar.html?src=assets/models/lontra_felina.glb&title=%F0%9F%A6%A6%20Lontra%20felina%20%28Chungungo%29" data-i18n="btnar">📱 Ver en AR</a>
+          <a class="btn btn-vr" href="viewervr.html?src=assets/models/lontra_felina.glb&title=%F0%9F%A6%A6%20Lontra%20felina%20%28Chungungo%29" data-i18n="btnvr">🥽 Ver en VR</a>
+        </div>
+      </article>
+      
+      <article class="card">
+        <h3>🦊 <span class="es">Zorro de Darwin (Lycalopex fulvipes)</span><span class="en hidden">Darwin's fox</span></h3>
+        <div class="tag">GLB • assets/models/lycalopex_fulvipes_1607.glb</div>
+        <div class="row" style="margin-top:10px">
+          <a class="btn btn-3d" href="viewer3d.html?src=assets/models/lycalopex_fulvipes_1607.glb&title=%F0%9F%A6%8A%20Zorro%20de%20Darwin%20%28Lycalopex%20fulvipes%29" data-i18n="btn3d">👁️ Ver en 3D</a>
+          <a class="btn btn-ar" href="viewerar.html?src=assets/models/lycalopex_fulvipes_1607.glb&title=%F0%9F%A6%8A%20Zorro%20de%20Darwin%20%28Lycalopex%20fulvipes%29" data-i18n="btnar">📱 Ver en AR</a>
+          <a class="btn btn-vr" href="viewervr.html?src=assets/models/lycalopex_fulvipes_1607.glb&title=%F0%9F%A6%8A%20Zorro%20de%20Darwin%20%28Lycalopex%20fulvipes%29" data-i18n="btnvr">🥽 Ver en VR</a>
+        </div>
+      </article>
+      
+      <article class="card">
+        <h3>🐬 <span class="es">Delfín chileno (Cephalorhynchus eutropia)</span><span class="en hidden">Chilean dolphin</span></h3>
+        <div class="tag">GLB • assets/models/cephalorhynchus_eutropia_delfin.glb</div>
+        <div class="row" style="margin-top:10px">
+          <a class="btn btn-3d" href="viewer3d.html?src=assets/models/cephalorhynchus_eutropia_delfin.glb&title=%F0%9F%90%AC%20Delf%C3%ADn%20chileno%20%28Cephalorhynchus%20eutropia%29" data-i18n="btn3d">👁️ Ver en 3D</a>
+          <a class="btn btn-ar" href="viewerar.html?src=assets/models/cephalorhynchus_eutropia_delfin.glb&title=%F0%9F%90%AC%20Delf%C3%ADn%20chileno%20%28Cephalorhynchus%20eutropia%29" data-i18n="btnar">📱 Ver en AR</a>
+          <a class="btn btn-vr" href="viewervr.html?src=assets/models/cephalorhynchus_eutropia_delfin.glb&title=%F0%9F%90%AC%20Delf%C3%ADn%20chileno%20%28Cephalorhynchus%20eutropia%29" data-i18n="btnvr">🥽 Ver en VR</a>
+        </div>
+      </article>
+      
+      <article class="card">
+        <h3>🐹 <span class="es">Tucu-tuco del norte (Ctenomys fulvus)</span><span class="en hidden">Northern tuco-tuco</span></h3>
+        <div class="tag">GLB • assets/models/ctenomys_fulvus_1113.glb</div>
+        <div class="row" style="margin-top:10px">
+          <a class="btn btn-3d" href="viewer3d.html?src=assets/models/ctenomys_fulvus_1113.glb&title=%F0%9F%90%B9%20Tucu-tuco%20del%20norte%20%28Ctenomys%20fulvus%29" data-i18n="btn3d">👁️ Ver en 3D</a>
+          <a class="btn btn-ar" href="viewerar.html?src=assets/models/ctenomys_fulvus_1113.glb&title=%F0%9F%90%B9%20Tucu-tuco%20del%20norte%20%28Ctenomys%20fulvus%29" data-i18n="btnar">📱 Ver en AR</a>
+          <a class="btn btn-vr" href="viewervr.html?src=assets/models/ctenomys_fulvus_1113.glb&title=%F0%9F%90%B9%20Tucu-tuco%20del%20norte%20%28Ctenomys%20fulvus%29" data-i18n="btnvr">🥽 Ver en VR</a>
+        </div>
+      </article>
+      
+      <article class="card">
+        <h3>🐭 <span class="es">Degú (Octodon degus)</span><span class="en hidden">Degu</span></h3>
+        <div class="tag">GLB • assets/models/octodon_degus.glb</div>
+        <div class="row" style="margin-top:10px">
+          <a class="btn btn-3d" href="viewer3d.html?src=assets/models/octodon_degus.glb&title=%F0%9F%90%AD%20Deg%C3%BA%20%28Octodon%20degus%29" data-i18n="btn3d">👁️ Ver en 3D</a>
+          <a class="btn btn-ar" href="viewerar.html?src=assets/models/octodon_degus.glb&title=%F0%9F%90%AD%20Deg%C3%BA%20%28Octodon%20degus%29" data-i18n="btnar">📱 Ver en AR</a>
+          <a class="btn btn-vr" href="viewervr.html?src=assets/models/octodon_degus.glb&title=%F0%9F%90%AD%20Deg%C3%BA%20%28Octodon%20degus%29" data-i18n="btnvr">🥽 Ver en VR</a>
+        </div>
+      </article>
+      
+    </div>
+
+    <div class="footer"><span data-i18n="credits">Sitio educativo para uso inclusivo en aula. Autoría: Francisco Pinto & Belén Acuña.</span></div>
+  </main>
+
+  <script>
+  // switch text elements for lang
+  function updateLangVisibility(){
+    const isEs = (currentLang === "es");
+    document.querySelectorAll(".es").forEach(el=>el.classList.toggle("hidden",!isEs));
+    document.querySelectorAll(".en").forEach(el=>el.classList.toggle("hidden",isEs));
+  }
+  document.addEventListener("DOMContentLoaded", updateLangVisibility);
+  const _origApply = applyI18n;
+  applyI18n = function(){ _origApply(); updateLangVisibility(); }
+  </script>
+</body>
+</html>

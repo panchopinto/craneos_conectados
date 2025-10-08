@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Viewer VR</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <script defer src="assets/js/app.js"></script>
+  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <div class="row" style="justify-content:space-between; align-items:center">
+      <a class="btn" href="./">⬅️ Inicio</a>
+      <div class="toolbar">
+        <a class="btn btn-contrast" href="#" onclick="toggleContrast();return false;">🌓 <span data-i18n="contrast">Alto contraste</span></a>
+        <a class="btn btn-text" href="#" onclick="setFontSize(1);return false;">A+</a>
+        <a class="btn btn-text" href="#" onclick="setFontSize(-1);return false;">A−</a>
+        <a class="btn btn-lang" href="#" onclick="toggleLang();return false;">🌐 <span data-i18n="lang">ES/EN</span></a>
+      </div>
+    </div>
+    <h1 id="title">🥽 VR</h1>
+  </div>
+
+  <a-scene background="color: #10182a">
+    <a-entity light="type: ambient; color: #BBB"></a-entity>
+    <a-entity light="type: directional; color: #FFF; intensity: 0.9" position="0 1 1"></a-entity>
+
+    <a-assets></a-assets>
+    <a-entity id="model" position="0 1.5 -1.6" rotation="0 30 0" scale="1 1 1"></a-entity>
+    <a-sky color="#0b1220"></a-sky>
+    <a-entity position="0 1.6 0">
+      <a-camera wasd-controls-enabled="false"></a-camera>
+    </a-entity>
+  </a-scene>
+
+  <script>
+    const src = getParam('src'); const title = decodeURIComponent(getParam('title')||'VR');
+    document.title = 'VR - ' + title;
+    document.getElementById('title').textContent = title;
+    const m = document.getElementById('model');
+    m.setAttribute('gltf-model', src);
+    // Autoscale roughly by bounding-box once loaded
+    m.addEventListener('model-loaded', e => {
+      try {
+        const bbox = new THREE.Box3().setFromObject(e.detail.model);
+        const size = new THREE.Vector3(); bbox.getSize(size);
+        const maxDim = Math.max(size.x, size.y, size.z);
+        const target = 0.8;
+        const s = target / maxDim;
+        m.setAttribute('scale', `${s} ${s} ${s}`);
+        m.setAttribute('position', `0 1.5 -1.6`);
+      } catch(err){ console.warn(err); }
+    });
+  </script>
+</body>
+</html>
