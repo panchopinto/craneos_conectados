@@ -8,6 +8,7 @@
 <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 <style>.split{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:900px){.split{grid-template-columns:1fr}}model-viewer{height:65vh;width:100%;border-radius:16px;background:#0b1220}</style>
   <link rel="stylesheet" href="assets/css/controls.css">
+  <link rel="stylesheet" href="assets/css/lockdown.css">
 </head><body><div class="container"><a class="btn" href="./">⬅️ Inicio</a><h1>🔍 Comparador</h1><div class="split"><model-viewer id="L" camera-controls></model-viewer><model-viewer id="R" camera-controls></model-viewer></div></div>
 <script>const list=(window.MODELS||[]);const L=document.getElementById("L"),R=document.getElementById("R");const p=new URLSearchParams(location.search);L.src=p.get("left")||(list[0]&&list[0].path);R.src=p.get("right")||(list[1]&&list[1].path)||L.src;L.addEventListener("camera-change",()=>{try{R.cameraOrbit=L.getCameraOrbit().toString();R.fieldOfView=L.fieldOfView;R.cameraTarget=L.getCameraTarget().toString();}catch(e){}});R.addEventListener("camera-change",()=>{try{L.cameraOrbit=R.getCameraOrbit().toString();L.fieldOfView=R.fieldOfView;L.cameraTarget=R.getCameraTarget().toString();}catch(e){}});</script>
 <footer>
@@ -21,4 +22,5 @@
   </div>
 </footer>
   <script src="assets/js/controls.js"></script>
+  <script defer src="assets/js/lockdown.js"></script>
 </body></html>
