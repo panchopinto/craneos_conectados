@@ -1,13 +1,32 @@
 
 (function(){
-  // Remove legacy duplicated bars if any
-  document.querySelectorAll('#access-controls, .access-controls, .toolbar-access, .controls-fixed').forEach(n=>n.remove());
+  // Prevent double-run
+  if (window.__accessibilityBarLoaded) return;
+  window.__accessibilityBarLoaded = true;
+
+  // Remove legacy bars immediately
+  function removeLegacy() {
+    document.querySelectorAll('#access-controls, .access-controls, .toolbar-access, .controls-fixed').forEach((n,i)=>{
+      if (i>0) n.remove();
+    });
+    // Remove stray "Controles:" labels outside our toolbar
+    Array.from(document.querySelectorAll('body *')).forEach(el=>{
+      if (!el.closest('#access-controls')) {
+        const t = (el.textContent||'').trim();
+        if (t.startsWith('🛠️') && t.replace(/\s+/g,'').toLowerCase().startswith('🛠️controles:')) {
+          el.remove();
+        } else if (/^\s*Controles:\s*$/i.test(t)) {
+          el.remove();
+        }
+      }
+    });
+  }
 
   // Inject unified bar
   const bar = document.createElement('div');
   bar.id = 'access-controls';
   bar.innerHTML = `
-    <span class="lbl">🛠️ <span class="es">Controles:</span><span class="en">Controls:</span></span>
+    <span class="lbl">🛠️ Controles:</span>
     <a id="btn-home" href="index.html" title="Inicio">🏠</a>
     <button id="btn-narrator" title="Narrador: leer / detener">🗣️</button>
     <button id="btn-contrast" title="Alto contraste">🌓</button>
@@ -18,6 +37,16 @@
     <button id="btn-cursor" title="Cursor accesible">🔍</button>
   `;
   document.documentElement.appendChild(bar);
+
+  // Compute "Inicio" absolute URL based on this script src (works in subcarpetas y GitHub Pages)
+  (function setHomeHref(){
+    const thisScript = document.currentScript || Array.from(document.scripts).find(s=>/assets\/js\/accessibility\.js/.test(s.src||''));
+    if (!thisScript) return;
+    const abs = new URL(thisScript.src, location.href);
+    const base = abs.href.replace(/assets\/js\/accessibility\.js(\?.*)?$/,''); // repo base
+    const home = base + 'index.html';
+    const a = document.getElementById('btn-home'); if (a) a.href = home;
+  })();
 
   // Language state
   const lang = localStorage.getItem('site_lang') || 'es';
@@ -75,8 +104,7 @@
   }
   document.getElementById('btn-narrator').addEventListener('click', ()=>{
     if('speechSynthesis' in window && window.speechSynthesis.speaking){
-      stopSpeech(); // toggle STOP
-      return;
+      stopSpeech(); return; // STOP
     }
     let txt = window.getSelection()?.toString().trim();
     if(!txt){
@@ -91,18 +119,18 @@
     }
   }, {capture:true});
 
-  // Seguridad disuasiva
+  // Security deterrents
   window.addEventListener('contextmenu', e=> e.preventDefault(), {capture:true});
   window.addEventListener('keydown', (e)=>{
     const hk = [
       (e.key==='F12'),
-      (e.ctrlKey && e.shiftKey && ['I','J','C'].includes(e.key.toUpperCase())),
-      (e.ctrlKey && ['S','U'].includes(e.key.toUpperCase()))
+      (e.ctrlKey && e.shiftKey && ['I','J','C'].includes((e.key||'').toUpperCase())),
+      (e.ctrlKey && ['S','U'].includes((e.key||'').toUpperCase()))
     ];
     if(hk.some(Boolean)){ e.preventDefault(); e.stopPropagation(); }
   }, {capture:true});
 
-  // Guía paso a paso
+  // Guide
   const overlay = document.createElement('div'); overlay.id='guide-overlay';
   const card = document.createElement('div'); card.id='guide-card';
   const actions = document.createElement('div'); actions.id='guide-actions';
@@ -150,9 +178,28 @@
     idx=0; overlay.style.display='block'; document.addEventListener('keydown', keyHandler); renderStep();
   });
 
+  // MutationObserver to prevent duplicates injected later
+  function cleanupDupes(){
+    const bars = document.querySelectorAll('#access-controls');
+    bars.forEach((b,i)=>{ if(i>0) b.remove(); });
+    // Remove any element containing "Controles:" not inside our bar
+    Array.from(document.querySelectorAll('body *')).forEach(el=>{
+      if (!el.closest('#access-controls')) {
+        const t = (el.textContent||'').trim();
+        if (/^🛠️?\s*Controles:/.test(t)) el.remove();
+      }
+    });
+  }
+  removeLegacy();
+  cleanupDupes();
+  const mo = new MutationObserver(()=> cleanupDupes());
+  mo.observe(document.documentElement, {childList:true, subtree:true});
+
   // Service Worker
   if('serviceWorker' in navigator){
-    const swPath = (document.currentScript && document.currentScript.src && document.currentScript.src.includes('/assets/js/')) ? '../../sw.js' : 'sw.js';
+    const thisScript = document.currentScript || Array.from(document.scripts).find(s=>/assets\/js\/accessibility\.js/.test(s.src||''));
+    const abs = thisScript ? new URL(thisScript.src, location.href) : new URL(location.href);
+    const swPath = abs.href.replace(/assets\/js\/accessibility\.js(\?.*)?$/,'sw.js');
     navigator.serviceWorker.register(swPath).catch(()=>{});
   }
 })();
