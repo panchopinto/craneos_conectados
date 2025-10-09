@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="es" class="lang-es" class="lang-es">
+<html lang="es" class="lang-es" class="lang-es" class="lang-es">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -56,6 +56,39 @@
   <script src="assets/js/controls.js"></script>
 
   <script src="assets/js/accessibility.js"></script>
+
+<script>
+/* GUIDE-AUTO-MARKERS */
+document.addEventListener('DOMContentLoaded', function() {
+  // Siempre: panel de controles
+  const ctrl = document.getElementById('access-controls');
+  if (ctrl && !ctrl.hasAttribute('data-guide')) {
+    ctrl.setAttribute('data-guide','Panel de controles|Ajusta contraste, tamaño de texto, idioma, narrador, cursor accesible y activa la guía.');
+  }
+
+  function mark(el, title, desc) {
+    if (el && !el.hasAttribute('data-guide')) el.setAttribute('data-guide', title + '|' + desc);
+  }
+
+  // Comunes
+  mark(document.querySelector('main, .content, .container, section'), 'Contenido principal', 'Aquí está el contenido clave de la página.');
+  mark(document.querySelector('h1, header h1, .hero h1'), 'Título', 'Punto de partida para orientar a los estudiantes.');
+
+  // Específicos por página
+  
+  
+  
+  
+
+  // viewer3d.html
+  (function(){ const v = document.querySelector('#viewer, [id*=viewer], model-viewer, canvas, a-scene'); mark(v,'Visor 3D','Arrastra, acerca/aleja y explora el modelo.'); })();
+
+  
+  
+
+});
+</script>
+
 </body>
 <footer>
   <div style="display:flex;flex-direction:column;gap:6px;align-items:center;text-align:center">

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="es" class="lang-es" class="lang-es">
+<html lang="es" class="lang-es" class="lang-es" class="lang-es">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -168,5 +168,38 @@
   </script>
   <script src="assets/js/controls.js"></script>
   <script src="assets/js/accessibility.js"></script>
+
+<script>
+/* GUIDE-AUTO-MARKERS */
+document.addEventListener('DOMContentLoaded', function() {
+  // Siempre: panel de controles
+  const ctrl = document.getElementById('access-controls');
+  if (ctrl && !ctrl.hasAttribute('data-guide')) {
+    ctrl.setAttribute('data-guide','Panel de controles|Ajusta contraste, tamaño de texto, idioma, narrador, cursor accesible y activa la guía.');
+  }
+
+  function mark(el, title, desc) {
+    if (el && !el.hasAttribute('data-guide')) el.setAttribute('data-guide', title + '|' + desc);
+  }
+
+  // Comunes
+  mark(document.querySelector('main, .content, .container, section'), 'Contenido principal', 'Aquí está el contenido clave de la página.');
+  mark(document.querySelector('h1, header h1, .hero h1'), 'Título', 'Punto de partida para orientar a los estudiantes.');
+
+  // Específicos por página
+  // index.html
+  mark(document.querySelector('article.card, .card, .grid .card'), 'Modelos 3D', 'Explora tarjetas con botones para ver en 3D, VR o AR.');
+  mark(Array.from(document.querySelectorAll('a, .btn, button')).find(a=>/Ver en 3D|3D/i.test(a?.textContent||'')),'Ver en 3D','Abre el visor 3D local (funciona offline).');
+  mark(Array.from(document.querySelectorAll('a, .btn, button')).find(a=>/Ver en AR|AR/i.test(a?.textContent||'')),'Ver en AR','Abre la vista de Realidad Aumentada (GLB local).');
+
+  
+  
+
+  
+  
+
+});
+</script>
+
 </body>
 </html>
