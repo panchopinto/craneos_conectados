@@ -1,0 +1,40 @@
+
+/* === Accesibilidad y estilos modernos === */
+:root{ --ui-bg:#101216; --ui-card:#161a22; --ui-border:#2a2f3a; --ui-txt:#e8ebf1; --ui-accent:#73d13d; --ui-warn:#ffb01f; }
+html,body{scroll-behavior:smooth}
+body.high-contrast{ filter: contrast(115%) saturate(120%); background:#000 !important; color:#fff !important; }
+#access-controls{ position:fixed; top:12px; right:12px; display:flex; gap:.5rem; z-index:99999; align-items:center;
+  background:rgba(16,18,22,.75); backdrop-filter: blur(6px); padding:.5rem .6rem; border:1px solid var(--ui-border); border-radius:16px; }
+#access-controls button{ font:600 14px/1.2 system-ui,Segoe UI,Roboto,Ubuntu; padding:.45rem .6rem; border:1px solid var(--ui-border);
+  background:linear-gradient(180deg,#1b2029,#11151c); color:var(--ui-txt); border-radius:12px; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,.25); }
+#access-controls button:hover{ transform: translateY(-1px); }
+#access-controls .sep{ width:1px; height:22px; background:var(--ui-border); margin:0 .25rem; }
+
+/* Tamaño de fuente base escalable */
+:root{ --font-scale: 1; }
+body{ font-size: calc(16px * var(--font-scale)); }
+
+/* Idiomas */
+.lang-es .es{ display: inline; } .lang-es .en{ display: none; }
+.lang-en .es{ display: none; } .lang-en .en{ display: inline; }
+
+/* Cursor accesible */
+body.cursor-xl{ cursor: none !important; }
+.cursor-dot, .cursor-ring{
+  position: fixed; pointer-events:none; z-index: 99998; display:none;
+}
+body.cursor-xl .cursor-dot, body.cursor-xl .cursor-ring{ display:block; }
+.cursor-dot{ width:10px; height:10px; border-radius:50%; background:white; mix-blend-mode:difference; }
+.cursor-ring{ width:40px; height:40px; border:2px solid white; border-radius:50%; transform: translate(-50%,-50%); mix-blend-mode:difference; }
+
+/* Guía paso a paso */
+#guide-overlay{ position:fixed; inset:0; background:rgba(0,0,0,.55); display:none; z-index:99990; }
+#guide-card{ position: fixed; z-index: 99991; max-width: 520px; background:#0f1218; color:#e6ebf7; border:1px solid #263042; border-radius:16px; padding:16px; box-shadow:0 10px 40px rgba(0,0,0,.4); }
+#guide-card h3{ margin:0 0 8px; font-size:18px }
+#guide-card p{ margin:0 0 10px; font-size:14px; opacity:.9 }
+#guide-actions{ display:flex; gap:.5rem; justify-content:flex-end }
+#guide-actions button{ background:#1a2230; border:1px solid #2a354a; padding:.45rem .8rem; border-radius:10px; color:#e6ebf7 }
+#guide-actions button.primary{ background:#2452ff; border-color:#2452ff; color:white; }
+
+/* Resaltado del paso */
+.guide-highlight{ outline: 3px solid #73d13d !important; outline-offset: 4px !important; border-radius:10px !important; }
